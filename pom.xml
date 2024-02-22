@@ -46,6 +46,7 @@
 				<configuration>
 					<goals>install</goals>
 					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<tag>HEAD</tag>
 				</configuration>
 			</plugin>
 		</plugins>
