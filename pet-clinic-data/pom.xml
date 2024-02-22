@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.ykomarnytskyi2022</groupId>
 		<artifactId>pet-clinic</artifactId>
-		<version>0.0.2</version>
+		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>pet-clinic-data</artifactId>
