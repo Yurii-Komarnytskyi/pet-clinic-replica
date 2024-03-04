@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.ykomarnytskyi2022.petclinic.model.Owner;
 import com.ykomarnytskyi2022.petclinic.services.OwnerService;
 import com.ykomarnytskyi2022.petclinic.services.VetService;
-import com.ykomarnytskyi2022.petclinic.services.map.OwnerServiceMap;
-import com.ykomarnytskyi2022.petclinic.services.map.VetServiceMap;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -26,8 +25,18 @@ public class DataLoader implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
 
+        Owner owner1 = new Owner();
+        owner1.setName("Michael");
+        owner1.setSurname("Weston");
+        
+        Owner owner2 = new Owner();
+        owner2.setName("Fiona");
+        owner2.setSurname("Glenanne");
+        
+        ownerService.save(owner1);
+        ownerService.save(owner2);
+        
 	}
 
 }
