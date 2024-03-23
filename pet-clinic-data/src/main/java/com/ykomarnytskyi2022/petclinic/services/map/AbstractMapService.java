@@ -1,10 +1,8 @@
 package com.ykomarnytskyi2022.petclinic.services.map;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Set;
 
 import com.ykomarnytskyi2022.petclinic.model.BaseEntity;
