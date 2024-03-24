@@ -5,10 +5,10 @@ import java.util.Set;
 import org.springframework.stereotype.Service;
 
 import com.ykomarnytskyi2022.petclinic.model.Speciality;
-import com.ykomarnytskyi2022.petclinic.services.SpecialitiesService;
+import com.ykomarnytskyi2022.petclinic.services.SpecialityService;
 
 @Service
-public class SpecialitiesMapService extends AbstractMapService<Speciality, Long> implements SpecialitiesService {
+public class SpecialityMapService extends AbstractMapService<Speciality, Long> implements SpecialityService {
 
 	static final Speciality SPECIAL_CASE_OBJECT;
 	static {
