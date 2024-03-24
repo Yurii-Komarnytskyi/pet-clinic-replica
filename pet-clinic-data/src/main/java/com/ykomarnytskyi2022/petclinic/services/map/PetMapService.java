@@ -1,5 +1,6 @@
 package com.ykomarnytskyi2022.petclinic.services.map;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
@@ -8,7 +9,16 @@ import com.ykomarnytskyi2022.petclinic.model.Pet;
 import com.ykomarnytskyi2022.petclinic.services.PetService;
 
 @Service
-public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService{
+public class PetMapService extends AbstractMapService<Pet, Long> implements PetService{
+	
+	static final Pet SPECIAL_CASE_OBJECT;
+	static {
+		SPECIAL_CASE_OBJECT = new Pet();
+		SPECIAL_CASE_OBJECT.setId(Long.valueOf(-1));
+		SPECIAL_CASE_OBJECT.setBirthDay(LocalDate.now());
+		SPECIAL_CASE_OBJECT.setOwner(OwnerMapService.SPECIAL_CASE_OBJECT);
+		SPECIAL_CASE_OBJECT.setPetType(PetTypeMapService.SPECIAL_CASE_OBJECT);
+	}
 
 	@Override
 	public Set<Pet> findAll() {
@@ -33,6 +43,11 @@ public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetS
 	@Override
 	public void deleteByID(Long id) {
 		super.deleteById(id);
+	}
+
+	@Override
+	protected Pet getSpecialCaseObject() {
+		return SPECIAL_CASE_OBJECT;
 	}
 
 }

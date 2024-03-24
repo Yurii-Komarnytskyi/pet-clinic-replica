@@ -40,7 +40,9 @@ public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> 
 		map.entrySet().removeIf(entry -> entry.getValue().equals(object));
 	}
 	
-	private Long getNextID() {
+	protected Long getNextID() {
 		return map.keySet().stream().mapToLong(Long::longValue).max().orElse(0L) + 1L;
 	}
+	
+	protected abstract T getSpecialCaseObject();
 }

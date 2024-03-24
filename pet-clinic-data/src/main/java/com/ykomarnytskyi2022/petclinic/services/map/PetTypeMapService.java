@@ -9,6 +9,13 @@ import com.ykomarnytskyi2022.petclinic.services.PetTypeService;
 
 @Service
 public class PetTypeMapService extends AbstractMapService<PetType, Long> implements PetTypeService {
+	
+	static final PetType SPECIAL_CASE_OBJECT;
+	static {
+		SPECIAL_CASE_OBJECT = new PetType();
+		SPECIAL_CASE_OBJECT.setId(Long.valueOf(-1));
+		SPECIAL_CASE_OBJECT.setName("No pet type, SPECIAL_CASE_OBJECT");
+	}
 
 	@Override
 	public Set<PetType> findAll() {
@@ -33,6 +40,11 @@ public class PetTypeMapService extends AbstractMapService<PetType, Long> impleme
 	@Override
 	public void deleteByID(Long id) {
 		super.deleteById(id);
+	}
+
+	@Override
+	protected PetType getSpecialCaseObject() {
+		return SPECIAL_CASE_OBJECT;
 	}
 
 }
