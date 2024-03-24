@@ -9,6 +9,7 @@ import org.springframework.expression.spel.support.ReflectivePropertyAccessor.Op
 import org.springframework.stereotype.Service;
 
 import com.ykomarnytskyi2022.petclinic.model.Owner;
+import com.ykomarnytskyi2022.petclinic.model.Pet;
 import com.ykomarnytskyi2022.petclinic.services.OwnerService;
 import com.ykomarnytskyi2022.petclinic.services.PetService;
 import com.ykomarnytskyi2022.petclinic.services.PetTypeService;
@@ -48,7 +49,22 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 
 	@Override
 	public Owner save(Owner owner) {
-		return super.save(owner);
+		Optional<Owner> ownerOptional = Optional.of(owner);
+		if (ownerOptional.isPresent()) {
+			ownerOptional.get().getPets().get().stream().forEach(pet -> {
+				if (pet.getPetType().isPresent() && pet.getPetType().get().getId() == null) {
+					pet.setPetType(petTypeService.save(pet.getPetType().get()));
+				}
+				if(pet.getId() == null) {
+					Pet savedPet = petService.save(pet);
+					pet.setId(savedPet.getId());
+				}
+
+			});
+			return super.save(owner);
+		} else {
+			return SPECIAL_CASE_OBJECT;
+		}
 	}
 
 	@Override

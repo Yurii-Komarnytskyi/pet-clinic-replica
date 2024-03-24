@@ -1,10 +1,13 @@
 package com.ykomarnytskyi2022.petclinic.bootstrap;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.ykomarnytskyi2022.petclinic.model.Owner;
+import com.ykomarnytskyi2022.petclinic.model.Pet;
 import com.ykomarnytskyi2022.petclinic.model.PetType;
 import com.ykomarnytskyi2022.petclinic.model.Vet;
 import com.ykomarnytskyi2022.petclinic.services.OwnerService;
@@ -31,24 +34,43 @@ public class DataLoader implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		PetType dawg = new PetType();
-		dawg.setName("da dawg");
-		PetType savedPetTypeDawg = petTypeService.save(dawg);
+		PetType rat = new PetType();
+		rat.setName("rat");
+		PetType savedPetTypeDawg = petTypeService.save(rat);
 		
 		PetType coon = new PetType();
-		coon.setName("da coon");
+		coon.setName("coon");
 		PetType savedPetTypeCoon = petTypeService.save(coon);
 
-        Owner owner1 = new Owner();
-        owner1.setName("Michael");
-        owner1.setSurname("Weston");
-        ownerService.save(owner1);
+        Owner mrSlave = new Owner();
+        mrSlave.setName("mr Slave");
+        mrSlave.setSurname("Garrison");
+        mrSlave.setAddress("308 Negra Arroyo Lane");
+        mrSlave.setCity("South Park CO");
+        mrSlave.setTelephone("1234567890");
+        ownerService.save(mrSlave);
         
-        Owner owner2 = new Owner();
-        owner2.setName("Fiona");
-        owner2.setSurname("Glenanne");
-        ownerService.save(owner2);
+        Pet lemmiwinks = new Pet();
+        lemmiwinks.setName("Lemmiwinks");
+        lemmiwinks.setOwner(mrSlave);
+        lemmiwinks.setPetType(savedPetTypeDawg);
+        lemmiwinks.setBirthDay(LocalDate.now());
+        mrSlave.getPets().get().add(lemmiwinks); 
+        
+        Owner eric = new Owner();
+        eric.setName("Eric");
+        eric.setSurname("Carteman");
+        eric.setAddress("28201 E. Bonanza St.");
+        eric.setCity("South Park CO");
+        eric.setTelephone("0987654321");
+        ownerService.save(eric);
 
+        Pet ericsCoon = new Pet();
+        ericsCoon.setName("Coon");
+        ericsCoon.setOwner(eric);
+        ericsCoon.setPetType(savedPetTypeCoon);
+        ericsCoon.setBirthDay(LocalDate.now());
+        eric.getPets().get().add(ericsCoon); 
         
         Vet yaroslav = new Vet();
         yaroslav.setName("Yaroslav");
