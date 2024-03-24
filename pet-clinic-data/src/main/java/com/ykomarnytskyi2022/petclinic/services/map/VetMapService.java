@@ -5,13 +5,15 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import com.ykomarnytskyi2022.petclinic.model.PetType;
+import com.ykomarnytskyi2022.petclinic.model.Speciality;
 import com.ykomarnytskyi2022.petclinic.model.Vet;
+import com.ykomarnytskyi2022.petclinic.services.SpecialityService;
 import com.ykomarnytskyi2022.petclinic.services.VetService;
 
 @Service
 public class VetMapService extends AbstractMapService<Vet, Long> implements VetService {
 
+	private final SpecialityService specialityService;
 	static final Vet SPECIAL_CASE_OBJECT;
 	static {
 		SPECIAL_CASE_OBJECT = new Vet();
@@ -21,7 +23,10 @@ public class VetMapService extends AbstractMapService<Vet, Long> implements VetS
 		SPECIAL_CASE_OBJECT.setSpecialities(Collections.emptySet());
 	}
 
-	
+	public VetMapService(SpecialityService specialityService) {
+		this.specialityService = specialityService;
+	}
+
 	@Override
 	public Set<Vet> findAll(){
 		return super.findAll();
@@ -34,6 +39,16 @@ public class VetMapService extends AbstractMapService<Vet, Long> implements VetS
 
 	@Override
 	public Vet save(Vet vet) {
+		
+		if(vet.getSpecialities().get().size() > 0) {
+			vet.getSpecialities().get().forEach(speciality -> {
+				if(speciality.getId() == null) {
+					Speciality savedSpeciality = specialityService.save(speciality);
+					speciality.setId(savedSpeciality.getId());
+				}
+			});
+		}
+		
 		return super.save(vet);
 	}
 
