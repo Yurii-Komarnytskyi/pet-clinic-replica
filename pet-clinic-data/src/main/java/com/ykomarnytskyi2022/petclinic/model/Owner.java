@@ -1,5 +1,7 @@
 package com.ykomarnytskyi2022.petclinic.model;
 
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class Owner extends Person {
@@ -7,7 +9,8 @@ public class Owner extends Person {
 	private String address;
 	private String city;
 	private String telephone;
-	private Set<Pet> pets;
+	private Optional<Set<Pet>> pets = Optional.of(new HashSet<Pet>());
+	
 
 	public String getAddress() {
 		return address;
@@ -33,12 +36,16 @@ public class Owner extends Person {
 		this.telephone = telephone;
 	}
 
-	public Set<Pet> getPets() {
+	public Optional<Set<Pet>> getPets() {
 		return pets;
 	}
 
 	public void setPets(Set<Pet> pets) {
-		this.pets = pets;
+		try {
+			this.pets = Optional.of(pets);			
+		} catch (NullPointerException e) {
+			throw new RuntimeException("Set of pets CANNOT be null");
+		}
 	}
 
 }
