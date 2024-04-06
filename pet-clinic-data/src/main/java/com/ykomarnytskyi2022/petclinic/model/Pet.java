@@ -3,23 +3,46 @@ package com.ykomarnytskyi2022.petclinic.model;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "pets")
 public class Pet extends BaseEntity {
-
-	private Optional<PetType> petType = Optional.empty();
+	
+	@ManyToOne
+	@JoinColumn(name = "type_id")
+	private PetType petType;
+	
+	@ManyToOne
+	@JoinColumn(name = "owner_id")
 	private Owner owner;
+	
+	@Column(name = "name")
 	private String name;
-	private LocalDate birthDay;
+	
+	@Column(name = "birth_date")
+	private LocalDate birthDate;
 
-	public Optional<PetType> getPetType() {
+
+
+	public PetType getPetType() {
 		return petType;
 	}
 
 	public void setPetType(PetType petType) {
-		try {
-			this.petType = Optional.of(petType);
-		} catch (NullPointerException e) {
-			throw new RuntimeException("petType CANNOT be null");
-		}
+		this.petType = petType;
+	}
+
+	public LocalDate getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	public String getName() {
@@ -38,12 +61,5 @@ public class Pet extends BaseEntity {
 		this.owner = owner;
 	}
 
-	public LocalDate getBirthDay() {
-		return birthDay;
-	}
-
-	public void setBirthDay(LocalDate birthDay) {
-		this.birthDay = birthDay;
-	}
 
 }

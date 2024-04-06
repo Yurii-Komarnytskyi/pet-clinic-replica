@@ -1,8 +1,15 @@
 package com.ykomarnytskyi2022.petclinic.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public class Person extends BaseEntity {
 
+	@Column(name = "name")
 	private String name; 
+	
+	@Column(name = "surname")
 	private String surname;
 	
 	public String getName() {
