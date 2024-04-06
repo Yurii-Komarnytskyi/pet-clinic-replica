@@ -1,24 +1,31 @@
 package com.ykomarnytskyi2022.petclinic.model;
 
-import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "veterinarians")
 public class Vet extends Person {
 
-	private Optional<Set<Speciality>> specialities = Optional.of(new HashSet<>());
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "vet_specialities", joinColumns = @JoinColumn(name ="vet_id"), inverseJoinColumns = @JoinColumn(name ="speciality_id"))
+	private Set<Speciality> specialities;
 
-	public Optional<Set<Speciality>> getSpecialities() {
+	public Set<Speciality> getSpecialities() {
 		return specialities;
 	}
 
 	public void setSpecialities(Set<Speciality> specialities) {
-		try {
-			this.specialities = Optional.of(specialities);
-		} catch (NullPointerException e) {
-			throw new RuntimeException("specialities CANNOT be null");
-		}
+		this.specialities = specialities;
 	}
+
+
 	
 	
 }
