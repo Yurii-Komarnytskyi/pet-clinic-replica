@@ -19,7 +19,7 @@ public class Pet extends BaseEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "type_id")
-	private PetType petType;
+	private Optional<PetType> petType = Optional.empty();
 	
 	@ManyToOne
 	@JoinColumn(name = "owner_id")
@@ -43,12 +43,14 @@ public class Pet extends BaseEntity {
 		this.visits = visits;
 	}
 
-	public PetType getPetType() {
+	
+
+	public Optional<PetType> getPetType() {
 		return petType;
 	}
 
 	public void setPetType(PetType petType) {
-		this.petType = petType;
+		this.petType = Optional.ofNullable(petType);
 	}
 
 	public LocalDate getBirthDate() {

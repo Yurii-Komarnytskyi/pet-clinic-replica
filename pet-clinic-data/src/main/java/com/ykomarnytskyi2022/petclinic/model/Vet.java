@@ -1,5 +1,6 @@
 package com.ykomarnytskyi2022.petclinic.model;
 
+import java.util.Optional;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
@@ -15,15 +16,17 @@ public class Vet extends Person {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "vet_specialities", joinColumns = @JoinColumn(name ="vet_id"), inverseJoinColumns = @JoinColumn(name ="speciality_id"))
-	private Set<Speciality> specialities;
+	private Optional<Set<Speciality>> specialities;
 
-	public Set<Speciality> getSpecialities() {
+	public Optional<Set<Speciality>> getSpecialities() {
 		return specialities;
 	}
 
 	public void setSpecialities(Set<Speciality> specialities) {
-		this.specialities = specialities;
+		this.specialities.get().addAll(specialities);
 	}
+
+
 
 
 	

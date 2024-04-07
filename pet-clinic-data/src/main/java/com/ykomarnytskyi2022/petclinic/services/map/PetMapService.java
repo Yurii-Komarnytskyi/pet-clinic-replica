@@ -15,7 +15,7 @@ public class PetMapService extends AbstractMapService<Pet, Long> implements PetS
 	static {
 		SPECIAL_CASE_OBJECT = new Pet();
 		SPECIAL_CASE_OBJECT.setId(Long.valueOf(-1));
-		SPECIAL_CASE_OBJECT.setBirthDay(LocalDate.now());
+		SPECIAL_CASE_OBJECT.setBirthDate(LocalDate.now());
 		SPECIAL_CASE_OBJECT.setOwner(OwnerMapService.SPECIAL_CASE_OBJECT);
 		SPECIAL_CASE_OBJECT.setPetType(PetTypeMapService.SPECIAL_CASE_OBJECT);
 	}
