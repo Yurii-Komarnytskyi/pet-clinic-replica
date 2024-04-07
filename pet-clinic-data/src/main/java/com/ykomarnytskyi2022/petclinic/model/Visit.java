@@ -19,7 +19,7 @@ public class Visit extends BaseEntity {
 	private String description;
 	
 	@ManyToOne
-	@JoinColumn(name = "pet_idgit ")
+	@JoinColumn(name = "pet_id")
 	private Pet pet;
 	
 	public LocalDate getDate() {

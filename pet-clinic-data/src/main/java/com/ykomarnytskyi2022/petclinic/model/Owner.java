@@ -24,7 +24,7 @@ public class Owner extends Person {
 	private String telephone;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-	private Optional<Set<Pet>> pets = Optional.of(new HashSet<Pet>());
+	private Set<Pet> pets = new HashSet<>();
 	
 
 	public String getAddress() {
@@ -52,14 +52,15 @@ public class Owner extends Person {
 	}
 
 	public Optional<Set<Pet>> getPets() {
-		return pets;
+		return Optional.ofNullable(pets);
 	}
 
 	public void setPets(Set<Pet> pets) {
+		
 		try {
-			this.pets = Optional.of(pets);			
+			this.pets.addAll(Optional.ofNullable(pets).get());			
 		} catch (NullPointerException e) {
-			throw new RuntimeException("Set of pets CANNOT be null");
+			throw new RuntimeException("Set of pets CANNOT be null on Owner");
 		}
 	}
 

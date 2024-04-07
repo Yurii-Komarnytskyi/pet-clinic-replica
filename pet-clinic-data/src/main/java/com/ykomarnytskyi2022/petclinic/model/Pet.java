@@ -19,7 +19,7 @@ public class Pet extends BaseEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "type_id")
-	private Optional<PetType> petType = Optional.empty();
+	private PetType petType;
 	
 	@ManyToOne
 	@JoinColumn(name = "owner_id")
@@ -31,7 +31,7 @@ public class Pet extends BaseEntity {
 	@Column(name = "birth_date")
 	private LocalDate birthDate;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pet ")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
 	private Set<Visit> visits = new HashSet<>();
 
 
@@ -46,11 +46,15 @@ public class Pet extends BaseEntity {
 	
 
 	public Optional<PetType> getPetType() {
-		return petType;
+		return Optional.ofNullable(petType);
 	}
 
 	public void setPetType(PetType petType) {
-		this.petType = Optional.ofNullable(petType);
+		try {
+			this.petType = Optional.ofNullable(petType).get();
+		} catch (NullPointerException e) {
+			throw new RuntimeException("petType field CANNOT be null on Pet");
+		}
 	}
 
 	public LocalDate getBirthDate() {

@@ -1,5 +1,6 @@
 package com.ykomarnytskyi2022.petclinic.model;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -16,14 +17,18 @@ public class Vet extends Person {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "vet_specialities", joinColumns = @JoinColumn(name ="vet_id"), inverseJoinColumns = @JoinColumn(name ="speciality_id"))
-	private Optional<Set<Speciality>> specialities;
+	private Set<Speciality> specialities = new HashSet<>();
 
 	public Optional<Set<Speciality>> getSpecialities() {
-		return specialities;
+		return Optional.ofNullable(specialities);
 	}
 
 	public void setSpecialities(Set<Speciality> specialities) {
-		this.specialities.get().addAll(specialities);
+		try {
+			this.specialities.addAll(Optional.ofNullable(specialities).get());			
+		} catch (NullPointerException e) {
+			throw new RuntimeException("Set of specialities CANNOT be null on Vet");
+		}
 	}
 
 
