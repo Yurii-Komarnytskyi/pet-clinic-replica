@@ -19,7 +19,7 @@ public class VetMapService extends AbstractMapService<Vet, Long> implements VetS
 		SPECIAL_CASE_OBJECT = new Vet();
 		SPECIAL_CASE_OBJECT.setId(Long.valueOf(-1));
 		SPECIAL_CASE_OBJECT.setName("specialCaseObject thus no name");
-		SPECIAL_CASE_OBJECT.setSurname("specialCaseObject thus no surname");
+		SPECIAL_CASE_OBJECT.setLastName("specialCaseObject thus no surname");
 		SPECIAL_CASE_OBJECT.setSpecialities(Collections.emptySet());
 	}
 

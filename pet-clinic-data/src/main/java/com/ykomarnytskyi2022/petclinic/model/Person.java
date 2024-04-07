@@ -7,23 +7,25 @@ import jakarta.persistence.MappedSuperclass;
 public class Person extends BaseEntity {
 
 	@Column(name = "name")
-	private String name; 
-	
-	@Column(name = "surname")
-	private String surname;
-	
+	private String name;
+
+	@Column(name = "last_name")
+	private String lastName;
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getSurname() {
-		return surname;
+
+	public String getLastName() {
+		return lastName;
 	}
-	public void setSurname(String surname) {
-		this.surname = surname;
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
-	
-	
+
 }

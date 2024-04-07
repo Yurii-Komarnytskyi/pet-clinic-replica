@@ -24,7 +24,7 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 		SPECIAL_CASE_OBJECT = new Owner();
 		SPECIAL_CASE_OBJECT.setId(Long.valueOf(-1));
 		SPECIAL_CASE_OBJECT.setName("specialCaseObject thus no name");
-		SPECIAL_CASE_OBJECT.setSurname("specialCaseObject thus no surname");
+		SPECIAL_CASE_OBJECT.setLastName("specialCaseObject thus no surname");
 		SPECIAL_CASE_OBJECT.setCity("specialCaseObject thus no city");
 		SPECIAL_CASE_OBJECT.setAddress("specialCaseObject thus no address");
 		SPECIAL_CASE_OBJECT.setTelephone("specialCaseObject thus no telephone");
@@ -79,7 +79,7 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 
 	@Override
 	public Owner findByLastName(String lastName) {
-		return super.map.entrySet().stream().filter(e -> e.getValue().getSurname() == lastName).map(e -> e.getValue())
+		return super.map.entrySet().stream().filter(e -> e.getValue().getLastName() == lastName).map(e -> e.getValue())
 				.findFirst().get();
 	}
 
