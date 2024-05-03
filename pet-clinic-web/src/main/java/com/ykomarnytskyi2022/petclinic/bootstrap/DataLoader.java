@@ -11,10 +11,12 @@ import com.ykomarnytskyi2022.petclinic.model.Pet;
 import com.ykomarnytskyi2022.petclinic.model.PetType;
 import com.ykomarnytskyi2022.petclinic.model.Speciality;
 import com.ykomarnytskyi2022.petclinic.model.Vet;
+import com.ykomarnytskyi2022.petclinic.model.Visit;
 import com.ykomarnytskyi2022.petclinic.services.OwnerService;
 import com.ykomarnytskyi2022.petclinic.services.PetTypeService;
 import com.ykomarnytskyi2022.petclinic.services.SpecialityService;
 import com.ykomarnytskyi2022.petclinic.services.VetService;
+import com.ykomarnytskyi2022.petclinic.services.VisitService;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -23,18 +25,17 @@ public class DataLoader implements CommandLineRunner {
 	private final VetService vetService;
 	private final PetTypeService petTypeService;
 	private final SpecialityService specialityService;
-	
-	
+	private final VisitService visitService;
+
 	@Autowired
 	public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
-			SpecialityService specialityService) {
+			SpecialityService specialityService, VisitService visitService) {
 		this.ownerService = ownerService;
 		this.vetService = vetService;
 		this.petTypeService = petTypeService;
 		this.specialityService = specialityService;
+		this.visitService = visitService;
 	}
-
-
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -87,6 +88,12 @@ public class DataLoader implements CommandLineRunner {
         eric.setCity("South Park CO");
         eric.setTelephone("0987654321");
         ownerService.save(eric);
+        
+        Visit lemmiwinksVisit = new Visit();
+        lemmiwinksVisit.setPet(lemmiwinks);
+        lemmiwinksVisit.setDate(LocalDate.now());
+        lemmiwinksVisit.setDescription("Claustrophobic after being in Mr Slave's intestine");
+        visitService.save(lemmiwinksVisit);
 
         Pet ericsCoon = new Pet();
         ericsCoon.setName("Coon");
