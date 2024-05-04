@@ -2,12 +2,14 @@ package com.ykomarnytskyi2022.petclinic.services.map;
 
 import java.util.Set;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.ykomarnytskyi2022.petclinic.model.PetType;
 import com.ykomarnytskyi2022.petclinic.services.PetTypeService;
 
 @Service
+@Profile({"default", "map"})
 public class PetTypeMapService extends AbstractMapService<PetType, Long> implements PetTypeService {
 	
 	static final PetType SPECIAL_CASE_OBJECT;

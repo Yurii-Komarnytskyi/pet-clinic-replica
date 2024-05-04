@@ -3,6 +3,7 @@ package com.ykomarnytskyi2022.petclinic.services.map;
 import java.time.LocalDate;
 import java.util.Set;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.ykomarnytskyi2022.petclinic.model.Pet;
@@ -10,6 +11,7 @@ import com.ykomarnytskyi2022.petclinic.model.Visit;
 import com.ykomarnytskyi2022.petclinic.services.VisitService;
 
 @Service
+@Profile({"default", "map"})
 public class VisitMapService extends AbstractMapService<Visit, Long> implements VisitService {
 	
 	static final Visit SPECIAL_CASE_OBJECT;

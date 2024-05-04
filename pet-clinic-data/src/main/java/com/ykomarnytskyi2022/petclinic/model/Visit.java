@@ -2,6 +2,7 @@ package com.ykomarnytskyi2022.petclinic.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -18,7 +19,7 @@ public class Visit extends BaseEntity {
 	@Column(name = "description")
 	private String description;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "pet_id")
 	private Pet pet;
 	

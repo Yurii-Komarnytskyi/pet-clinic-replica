@@ -1,6 +1,8 @@
 package com.ykomarnytskyi2022.petclinic.bootstrap;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -89,12 +91,12 @@ public class DataLoader implements CommandLineRunner {
         eric.setTelephone("0987654321");
         ownerService.save(eric);
         
-        Visit lemmiwinksVisit = new Visit();
-        lemmiwinksVisit.setPet(lemmiwinks);
-        lemmiwinksVisit.setDate(LocalDate.now());
-        lemmiwinksVisit.setDescription("Claustrophobic after being in Mr Slave's intestine");
-        visitService.save(lemmiwinksVisit);
-
+        Visit visit = new Visit();
+        visit.setPet(lemmiwinks);
+        visit.setDate(LocalDate.now());
+        visit.setDescription("Claustrophobic after being in Mr Slave's intestine");
+        visitService.save(visit);
+        
         Pet ericsCoon = new Pet();
         ericsCoon.setName("Coon");
         ericsCoon.setOwner(eric);

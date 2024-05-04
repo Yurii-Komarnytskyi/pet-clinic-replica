@@ -2,12 +2,14 @@ package com.ykomarnytskyi2022.petclinic.services.map;
 
 import java.util.Set;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.ykomarnytskyi2022.petclinic.model.Speciality;
 import com.ykomarnytskyi2022.petclinic.services.SpecialityService;
 
 @Service
+@Profile({"default", "map"})
 public class SpecialityMapService extends AbstractMapService<Speciality, Long> implements SpecialityService {
 
 	static final Speciality SPECIAL_CASE_OBJECT;
