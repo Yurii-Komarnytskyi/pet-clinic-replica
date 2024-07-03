@@ -51,8 +51,11 @@ public class Owner extends Person {
 		this.telephone = telephone;
 	}
 
-	public Optional<Set<Pet>> getPets() {
-		return Optional.ofNullable(pets);
+//	public Optional<Set<Pet>> getPets() {
+//		return Optional.ofNullable(pets);
+//	}
+	public Set<Pet> getPets() {
+		return Optional.ofNullable(pets).get();
 	}
 
 	public void setPets(Set<Pet> pets) {
