@@ -43,6 +43,7 @@ public class OwnerController {
 		if (owner.getLastName() == null) {
             owner.setLastName("");
         }
+		System.out.println(owner);
 		String lastName = String.format("%%%s%%", owner.getLastName());
         List<Owner> results = ownerService.findAllByLastNameLike(lastName);
         if (results.isEmpty()) {

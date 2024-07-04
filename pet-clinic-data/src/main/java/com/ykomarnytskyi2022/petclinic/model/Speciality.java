@@ -10,6 +10,9 @@ public class Speciality extends BaseEntity {
 	
 	@Column(name = "specialityDescription")
 	private String specialityDescription;
+	
+	public Speciality() {
+	}
 
 	public String getSpecialityDescription() {
 		return specialityDescription;
