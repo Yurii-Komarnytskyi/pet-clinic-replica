@@ -1,6 +1,7 @@
 package com.ykomarnytskyi2022.petclinic.services.map;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -89,4 +90,9 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 		return SPECIAL_CASE_OBJECT;
 	}
 
+	@Override
+	public List<Owner> findAllByLastNameLike(String lastName) {
+		System.out.println("dummy findAllByLastNameLike");
+		return null;
+	}
 }
