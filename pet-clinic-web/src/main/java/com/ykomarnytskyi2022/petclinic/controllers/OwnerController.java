@@ -21,7 +21,7 @@ import com.ykomarnytskyi2022.petclinic.services.OwnerService;
 @RequestMapping("/owners")
 @Controller
 public class OwnerController {
-    private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
+    private static final String CREATE_OR_UPDATE_OWNER_FORM = "owners/createOrUpdateOwnerForm";
 
     private final OwnerService ownerService;
 
@@ -57,7 +57,7 @@ public class OwnerController {
             owner = results.get(0);
             return "redirect:/owners/".concat(String.valueOf(owner.getId()));
         } else {
-            model.addAttribute("selections", results);
+            model.addAttribute("owners	", results);
             return "owners/ownersList";
         }
     }
@@ -72,13 +72,13 @@ public class OwnerController {
     @GetMapping("/new")
     public String initCreationForm(Model model) {
         model.addAttribute("owner", new Owner());
-        return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+        return CREATE_OR_UPDATE_OWNER_FORM;
     }
 
     @PostMapping("/new")
     public String processCreationForm(Owner owner, BindingResult result) {
         if (result.hasErrors()) {
-            return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+            return CREATE_OR_UPDATE_OWNER_FORM;
         } else {
             Owner savedOwner =  ownerService.save(owner);
             return "redirect:/owners/" + savedOwner.getId();
@@ -88,13 +88,13 @@ public class OwnerController {
     @GetMapping("/{ownerId}/edit")
     public String initUpdateOwnerForm(@PathVariable Long ownerId, Model model) {
         model.addAttribute(ownerService.findById(ownerId));
-        return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+        return CREATE_OR_UPDATE_OWNER_FORM;
     }
 
     @PostMapping("/{ownerId}/edit")
     public String processUpdateOwnerForm(Owner owner, BindingResult result, @PathVariable Long ownerId) {
         if (result.hasErrors()) {
-            return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+            return CREATE_OR_UPDATE_OWNER_FORM;
         } else {
             owner.setId(ownerId);
             Owner savedOwner = ownerService.save(owner);
