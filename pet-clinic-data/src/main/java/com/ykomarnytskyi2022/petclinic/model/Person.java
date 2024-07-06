@@ -6,18 +6,18 @@ import jakarta.persistence.MappedSuperclass;
 @MappedSuperclass
 public class Person extends BaseEntity {
 
-	@Column(name = "name")
-	private String name;
+	@Column(name = "first_name")
+	private String firstName;
 
 	@Column(name = "last_name")
 	private String lastName;
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
@@ -27,5 +27,5 @@ public class Person extends BaseEntity {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
+	
 }

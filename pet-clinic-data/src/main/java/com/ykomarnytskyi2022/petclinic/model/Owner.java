@@ -68,9 +68,9 @@ public class Owner extends Person {
 
 	@Override
 	public String toString() {
-		return "Owner [address=" + address + ", city=" + city + ", telephone=" + telephone + ", pets=" + pets + "]";
+		return "Owner [getName()=" + getFirstName() + ", getLastName()=" + getLastName() + ", getId()=" + getId() + "]";
 	}
-	
+
 	
 
 }

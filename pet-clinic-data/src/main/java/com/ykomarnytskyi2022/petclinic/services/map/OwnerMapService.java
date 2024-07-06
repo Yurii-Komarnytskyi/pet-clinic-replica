@@ -25,7 +25,7 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 	static {
 		SPECIAL_CASE_OBJECT = new Owner();
 		SPECIAL_CASE_OBJECT.setId(Long.valueOf(-1));
-		SPECIAL_CASE_OBJECT.setName("specialCaseObject thus no name");
+		SPECIAL_CASE_OBJECT.setFirstName("specialCaseObject thus no name");
 		SPECIAL_CASE_OBJECT.setLastName("specialCaseObject thus no surname");
 		SPECIAL_CASE_OBJECT.setCity("specialCaseObject thus no city");
 		SPECIAL_CASE_OBJECT.setAddress("specialCaseObject thus no address");
