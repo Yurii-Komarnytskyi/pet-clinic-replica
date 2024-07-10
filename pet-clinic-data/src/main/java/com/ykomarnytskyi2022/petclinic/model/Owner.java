@@ -58,12 +58,28 @@ public class Owner extends Person {
 	}
 
 	public void setPets(Set<Pet> pets) {
-		
 		try {
 			this.pets.addAll(Optional.ofNullable(pets).get());			
 		} catch (NullPointerException e) {
 			throw new RuntimeException("Set of pets CANNOT be null on Owner");
 		}
+	}
+	
+	public Pet getPet(String name) {
+		return getPet(name, false);
+	}
+
+	public Pet getPet(String petName, boolean newIgnored) {
+		String petNameLowercased = petName.toLowerCase();
+		for (Pet pet : pets) {
+			if(!newIgnored || !pet.isNew()) {
+				String compNameLowercased = pet.getName().toLowerCase();
+				if(petNameLowercased.equals(compNameLowercased)) {
+					 return pet;
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override

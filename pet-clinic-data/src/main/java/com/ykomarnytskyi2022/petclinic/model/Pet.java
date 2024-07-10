@@ -48,8 +48,8 @@ public class Pet extends BaseEntity {
 
 	
 
-	public Optional<PetType> getPetType() {
-		return Optional.ofNullable(petType);
+	public PetType getPetType() {
+		return petType;
 	}
 
 	public void setPetType(PetType petType) {
