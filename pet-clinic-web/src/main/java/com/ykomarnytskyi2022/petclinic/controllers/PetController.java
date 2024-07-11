@@ -23,8 +23,6 @@ import com.ykomarnytskyi2022.petclinic.services.OwnerService;
 import com.ykomarnytskyi2022.petclinic.services.PetService;
 import com.ykomarnytskyi2022.petclinic.services.PetTypeService;
 
-
-
 @Controller
 @RequestMapping("/owners/{ownerId}")
 public class PetController {
@@ -39,39 +37,38 @@ public class PetController {
 		this.petTypeService = petTypeService;
 		this.ownerService = ownerService;
 	}
-	
-	
+
 	@ModelAttribute("types")
 	public Set<PetType> populatePetPypes() {
 		return petTypeService.findAll();
 	}
-	
 
 	@ModelAttribute("owner")
 	public Owner findOwner(@PathVariable("ownerId") Long ownerId) {
 		return ownerService.findById(ownerId);
 	}
-	
+
 	@InitBinder("owner")
 	public void initOwnerBinder(WebDataBinder binder) {
 		binder.setDisallowedFields("id");
 	}
-	
+
 	@GetMapping("/pets/new")
 	public String initCreationForm(Owner owner, Model model) {
 		Pet pet = new Pet();
 		owner.getPets().add(pet);
+		pet.setOwner(owner);
 		model.addAttribute("pet", pet);
 		return PETS_CREATE_OR_UPDATE_FORM;
 	}
-	
+
 	@PostMapping("/pets/new") // Annot jakarta.validation.Valid on pet in the orig.
-	public String processCreationForm(Owner owner,@Validated Pet pet, BindingResult bindingResult, Model model) {
-		if(StringUtils.hasLength(pet.getName()) && pet.isNew() && owner.getPet(pet.getName(), true) != null)	 {
+	public String processCreationForm(Owner owner, @Validated Pet pet, BindingResult bindingResult, Model model) {
+		if (StringUtils.hasLength(pet.getName()) && pet.isNew() && owner.getPet(pet.getName(), true) != null) {
 			bindingResult.rejectValue("name", "duplicate", "already exists");
 		}
 		owner.getPets().add(pet);
-		if(bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors()) {
 			model.addAttribute("pet", pet);
 			return PETS_CREATE_OR_UPDATE_FORM;
 		} else {
@@ -79,23 +76,25 @@ public class PetController {
 			return "redirect:/owners/".concat(String.valueOf(owner.getId()));
 		}
 	}
-	
+
 	@GetMapping("/pets/{petId}/edit")
 	public String initUpdateForm(@PathVariable Long petId, Model model) {
 		model.addAttribute("pet", petService.findById(petId));
 		return PETS_CREATE_OR_UPDATE_FORM;
 	}
-	
+
 	@PostMapping("/pets/{petId}/edit") // Annot jakarta.validation.Valid on pet in the orig.
-	public String processUpdateForm(@Validated Pet pet, BindingResult bindingResult, Owner owner, Model model) {
-		if(bindingResult.hasErrors()) {
+		public String processUpdateForm(@Validated Pet pet, BindingResult bindingResult, Owner owner, Model model) {
+		if (bindingResult.hasErrors()) {
 			pet.setOwner(owner);
 			model.addAttribute("pet", pet);
 			return PETS_CREATE_OR_UPDATE_FORM;
 		} else {
-			 owner.getPets().add(pet);
-			 petService.save(pet);
-			 return "redirect:/owners/".concat(String.valueOf(owner.getId()));
+			Pet persisted = petService.findById(pet.getId());
+			persisted.setOwner(owner);
+			owner.getPets().add(persisted);
+			petService.save(persisted);
+			return "redirect:/owners/".concat(String.valueOf(owner.getId()));
 		}
 	}
 }
