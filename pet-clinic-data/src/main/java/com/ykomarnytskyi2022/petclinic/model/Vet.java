@@ -22,8 +22,8 @@ public class Vet extends Person {
 	public Vet() {
 	}
 
-	public Optional<Set<Speciality>> getSpecialities() {
-		return Optional.ofNullable(specialities);
+	public Set<Speciality> getSpecialities() {
+		return specialities;
 	}
 
 	public void setSpecialities(Set<Speciality> specialities) {
